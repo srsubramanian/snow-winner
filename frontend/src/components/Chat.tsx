@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Send, Bot, User, Loader2 } from "lucide-react";
@@ -109,6 +110,7 @@ export function Chat() {
                 {message.role === "assistant" ? (
                   <div className="prose prose-sm dark:prose-invert max-w-none">
                     <ReactMarkdown
+                      remarkPlugins={[remarkGfm]}
                       components={{
                         table: ({ children }) => (
                           <table className="border-collapse border border-border my-2 text-sm">
