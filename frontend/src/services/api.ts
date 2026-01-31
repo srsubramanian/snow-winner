@@ -37,3 +37,26 @@ export async function fetchStats(): Promise<DashboardStats> {
   }
   return response.json();
 }
+
+export interface ChatMessage {
+  role: 'user' | 'assistant';
+  content: string;
+}
+
+export interface ChatResponse {
+  response: string;
+}
+
+export async function sendChatMessage(messages: ChatMessage[]): Promise<ChatResponse> {
+  const response = await fetch(`${API_BASE_URL}/chat`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ messages }),
+  });
+  if (!response.ok) {
+    throw new Error(`Chat failed: ${response.statusText}`);
+  }
+  return response.json();
+}

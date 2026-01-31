@@ -1,6 +1,9 @@
+from dotenv import load_dotenv
+load_dotenv()  # Load .env file before other imports
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import tickets
+from app.routers import tickets, chat
 
 app = FastAPI(
     title="ServiceNow Change Ticket Compliance API",
@@ -19,6 +22,7 @@ app.add_middleware(
 
 # Include routers
 app.include_router(tickets.router)
+app.include_router(chat.router)
 
 
 @app.get("/")
